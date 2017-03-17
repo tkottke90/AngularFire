@@ -20,7 +20,8 @@ export class Add {
   items: FirebaseListObservable<any[]>;
   temp: AngularFire;
 
-
+  @Output() clearView = new EventEmitter<number>();
+  
   constructor(af: AngularFire) {
     this.items = af.database.list('/items'); 
     this.temp = af;
@@ -35,11 +36,8 @@ export class Add {
       
       if(item !== "" && un !== "" && pw !== ""){
         var userQuery = this.temp.database.object(userPath,{preserveSnapshot: true});
-        
-        
-        userQuery.subscribe(data => {
+        userQuery.$ref.once('value').then(data => {
           console.log(data.key);
-          console.log(data.val());
           if(data.val() == null){
             console.log("User does not exsist");
             let user = this.temp.database.object('/items/' + un);
@@ -48,10 +46,12 @@ export class Add {
               dateLastMod: curTime,
               name: item,
               username: un,
-              password: pw
+              password: pw,
+              cards: {}
             }).then(_ => {
               console.log("New User:" + un);
-              window.location.reload();
+              //window.location.reload();
+              this.clearView.emit(0);
             });  
           } else {
             console.log("User exsist");
@@ -72,4 +72,15 @@ export class Add {
   
     }
   }
+
+  /*
+    Method to check db if user already exists prior to allowing
+    them to create a new account.  This will also check to see if the 
+    users name already exists in the datbase
+
+    ** Future **
+    Recover UN/PW?
+
+  */
+  checkUser(){}
 }

@@ -3,4 +3,4 @@
   <div class="button" id="signup" (click)="changeView(1);">Sign Up</div>
 </div>
 <list-add [ngClass]="{ 'nUser' : isClassVisible }"></list-add>
-<app-enter [ngClass]="{ 'eUser' : isLoginVisible }"></app-enter>
+<app-enter [ngClass]="{ 'eUser' : isLoginVisible }" (clearView)="clearView($event)"></app-enter>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -9,6 +9,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 
 
 export class AppEnterComponent implements OnInit {
+  @Output() clearView = new EventEmitter<number>();
   dbRef: AngularFire;
 
   constructor(af: AngularFire) {
@@ -23,9 +24,12 @@ export class AppEnterComponent implements OnInit {
     if(un !== "" && pw !== ""){
       let user = this.dbRef.database.object(userpath,{preserveSnapshot:true});
     
-  
+      // If Successful:
+      this.clearView.emit(0);
     }
   }
+
+  
 
   ngOnInit() {
   }
