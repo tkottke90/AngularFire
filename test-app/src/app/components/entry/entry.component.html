@@ -1,0 +1,6 @@
+<div class="entry">
+  <div class="button" id="login" (click)="changeView(2);">Login</div>
+  <div class="button" id="signup" (click)="changeView(1);">Sign Up</div>
+</div>
+<list-add [ngClass]="{ 'nUser' : isClassVisible }"></list-add>
+<app-enter [ngClass]="{ 'eUser' : isLoginVisible }"></app-enter>

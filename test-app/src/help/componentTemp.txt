@@ -1,0 +1,15 @@
+cmd Line Scripts:
+
+https://github.com/angular/angular-cli
+
+- Test Design:
+    npm run start
+
+- Deploy Design:
+    npm run deploy
+
+- New Component:
+    ng g component <name of component>
+
+- Firebase Snapshots:
+    https://firebase.google.com/docs/reference/js/firebase.database.DataSnapshot

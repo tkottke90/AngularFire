@@ -1,0 +1,15 @@
+<div id="listmain">
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Username</th>
+      <th>Password</th>
+    </tr>
+    <tr *ngFor="let item of items | async">
+      <th>{{ item.name }}</th>
+      <th>{{ item.username }}</th>
+      <th>{{ item.password }}</th>
+      <th><button class="delete" (click)="delete(item)">X</button></th>
+    </tr>
+  </table>
+</div>

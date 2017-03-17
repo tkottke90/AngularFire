@@ -1,0 +1,46 @@
+#addmain {
+    margin: 2.5%;
+    padding: 2%;
+}
+
+label {
+    width: 20%;
+    padding: 2.5%;
+    font-size: 85%;
+}
+
+input {
+    width:70%;
+    padding: 2.5%;
+    font-size: 95%;
+}
+
+input:focus{
+    border: 1px solid black;
+}
+
+div.notification {
+    display: none;
+
+    margin: 1%; 
+
+    font-size: 50%;
+    color: red;
+
+    transition: display 1s;
+}
+
+div.notification.show{
+    display: block;
+}
+
+.btnremove {
+    margin: 5%;
+    padding: 5%; 
+    float: right;
+    background-color: transparent;
+    border: 2px solid black;
+    box-shadow: 0;
+    border-radius: 15%;
+    cursor: pointer;
+}

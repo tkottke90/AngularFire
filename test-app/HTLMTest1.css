@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+.header {
+    width: 100%;
+    background-color: black;
+}
+
+.body {}
+
+.nav {}
+
+@media only screen and (max-width: 768px){}

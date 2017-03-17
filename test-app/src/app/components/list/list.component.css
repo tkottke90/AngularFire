@@ -1,0 +1,14 @@
+#listmain {
+    width: 74.5%;
+    margin: 2%;
+    padding: 0.5%;
+}
+
+table {
+    width: 95%;
+}
+
+.delete {
+    background-color: transparent;
+    box-shadow: 0;
+}
