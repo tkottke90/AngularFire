@@ -17,6 +17,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 })
 
 export class Add {
+  progLog: FirebaseListObservable<any[]>;
   items: FirebaseListObservable<any[]>;
   temp: AngularFire;
 
@@ -24,6 +25,7 @@ export class Add {
   
   constructor(af: AngularFire) {
     this.items = af.database.list('/items'); 
+    this.progLog = af.database.list('/log');
     this.temp = af;
   }
   add(item: string, un: string, pw: string){
@@ -31,8 +33,24 @@ export class Add {
       let curTime = (new Date()).toString();
       let userPath:string = "/items/"+un;
 
-/*      var testQuery = this.temp.database.object("items",{preserveSnapshot: true});
-      testQuery.$ref.once("value").then(snapshot => {console.log("User Exists: " + snapshot.child(un).exists())});*/
+      var testQuery = this.temp.database.list("items",{
+        preserveSnapshot: true,
+        query: {
+          orderByChild: "name",
+          equalTo: item.toLocaleUpperCase()
+        }  
+      });
+      testQuery.$ref.once("value").then(snapshots => {
+        snapshots.forEach(element => {
+          let itemUpper:string = item.toUpperCase();
+          let elemUpper = element.val().name.toUpperCase();
+          if(itemUpper == elemUpper){console.log("Match Found")}
+          console.log(item.toUpperCase());          
+          console.log(element.key);
+          console.log(element.val().name);
+        });
+
+      });
       
       if(item !== "" && un !== "" && pw !== ""){
         var userQuery = this.temp.database.object(userPath,{preserveSnapshot: true});
@@ -42,16 +60,31 @@ export class Add {
             console.log("User does not exsist");
             let user = this.temp.database.object('/items/' + un);
             user.set({  
-              dateCreate: curTime,
               dateLastMod: curTime,
-              name: item,
+              name: item.toUpperCase(),
               username: un,
               password: pw,
-              cards: {}
+              accountStatus: 'enabled',
+              cards: {
+                0: {
+                  type: 'text_card'
+                }
+              },
+              log: {}
             }).then(_ => {
-              console.log("New User:" + un);
-              //window.location.reload();
-              this.clearView.emit(0);
+              let log = this.temp.database.list('/items/' + un + '/log');
+              log.push({
+                event: "User Created",
+                timestamp: curTime
+              }).then(_ => {
+                console.log("New User:" + un);
+                this.clearView.emit(0);
+              });
+              this.progLog.push({
+                event: "User Created",
+                timestamp: curTime,
+                username: un
+              });
             });  
           } else {
             console.log("User exsist");
@@ -76,11 +109,59 @@ export class Add {
   /*
     Method to check db if user already exists prior to allowing
     them to create a new account.  This will also check to see if the 
-    users name already exists in the datbase
+    users name already exists in the database
 
     ** Future **
     Recover UN/PW?
 
   */
-  checkUser(){}
+  checkUser(username: string, name: string):number{
+    let log = {
+      event: "checkUser",
+      name: name,
+      username: username
+    };
+    let status = {};
+    let result:number;
+    let userPath = '/items/' + username;
+    
+    // Check Username Taken
+    let txtUN = document.getElementById("username");
+    var userQuery = this.temp.database.object('/items',{preserveSnapshot: true});
+    userQuery.$ref.once("value").then(snapshot => {
+      if(snapshot.child(username).exists()){
+        result = 1;
+        txtUN.style.border = "1px solid red";
+      }else{
+        result = 0;
+        txtUN.style.border = "1px solid black";
+      }
+      status['usernameTaken'] = snapshot.child(username).exists();
+    });
+
+    // Check Name for Existing User
+    
+    var testQuery = this.temp.database.list("items",{
+        preserveSnapshot: true,
+        query: {
+          orderByChild: "name",
+          equalTo: name.toLocaleUpperCase()
+        }  
+      });
+      testQuery.$ref.once("value").then(snapshots => {
+        snapshots.forEach(element => {
+          let itemUpper:string = name.toUpperCase();
+          let elemUpper = element.val().name.toUpperCase();
+          if(itemUpper == elemUpper){
+            // Name found in DB
+          }else{
+            // Name not found in DB
+          }
+        });
+      });        
+
+
+    this.progLog.push(log);
+    return 0;
+  }
 }
