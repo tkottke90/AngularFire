@@ -7,12 +7,9 @@ app-header {
     margin: 0;
 }
 
-app-entry {
-    padding: 1%;
-    width: 33%;
-    float: right;
-}
 
-list-add {
-    float: left;
+app-debugtool {
+    width: 33%;
+    padding: 1%;
+    border: 1px solid blue;
 }
