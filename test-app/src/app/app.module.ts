@@ -10,6 +10,7 @@ import { List } from './components/list/list.component';
 import { HeaderComponent } from './components/header/header.component';
 import { EntryComponent } from './components/entry/entry.component';
 import { AppEnterComponent } from './components/enter/app-enter.component';
+import { DebugtoolComponent } from './components/debugtool/debugtool.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AppEnterComponent } from './components/enter/app-enter.component';
     List,
     HeaderComponent,
     EntryComponent,
-    AppEnterComponent
+    AppEnterComponent,
+    DebugtoolComponent
   ],
   imports: [
     BrowserModule,

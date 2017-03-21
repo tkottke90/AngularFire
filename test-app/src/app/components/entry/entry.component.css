@@ -1,8 +1,8 @@
-.entry {
-    box-sizing: border-box;
+:host {
     float: right;
-    width: 100%;
-    padding: 5%;
+    width: 33%;
+    padding: 1%;
+    margin: 1%;
 }
 
 .button {
@@ -11,8 +11,9 @@
     margin: 2.5%;
     padding: 5%;
     width: 30%;
+    font-size: 5vmin;
 
-    font-size: 4vmin;
+    display: block;
 }
 
 #login {
@@ -45,10 +46,11 @@
 
 list-add.nUser{
     display: none;
+    margin: 5%;
 }
 
 list-add {
-    display: block;
+    display: inline-block;
 }
 
 app-enter.eUser{
@@ -56,5 +58,5 @@ app-enter.eUser{
 }
 
 app-enter {
-    display: block;
+    display: inline-block;
 }

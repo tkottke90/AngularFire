@@ -9,7 +9,7 @@ import {AngularFire, FirebaseListObservable} from 'angularfire2';
 export class List {
   items: FirebaseListObservable<any[]>;
   constructor(af: AngularFire) {
-    this.items = af.database.list('/items');
+    this.items = af.database.list('/users');
   }
   delete(item){
     this.items.remove(item);

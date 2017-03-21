@@ -24,16 +24,16 @@ export class Add {
   @Output() clearView = new EventEmitter<number>();
   
   constructor(af: AngularFire) {
-    this.items = af.database.list('/items'); 
+    this.items = af.database.list('/users'); 
     this.progLog = af.database.list('/log');
     this.temp = af;
   }
   add(item: string, un: string, pw: string){
       let taken:boolean = false;
       let curTime = (new Date()).toString();
-      let userPath:string = "/items/"+un;
+      let userPath:string = "/users/"+un;
 
-      var testQuery = this.temp.database.list("items",{
+      var testQuery = this.temp.database.list("/users",{
         preserveSnapshot: true,
         query: {
           orderByChild: "name",
@@ -58,7 +58,7 @@ export class Add {
           console.log(data.key);
           if(data.val() == null){
             console.log("User does not exsist");
-            let user = this.temp.database.object('/items/' + un);
+            let user = this.temp.database.object('/users/' + un);
             user.set({  
               dateLastMod: curTime,
               name: item.toUpperCase(),
@@ -72,7 +72,7 @@ export class Add {
               },
               log: {}
             }).then(_ => {
-              let log = this.temp.database.list('/items/' + un + '/log');
+              let log = this.temp.database.list('/users/' + un + '/log');
               log.push({
                 event: "User Created",
                 timestamp: curTime
@@ -123,11 +123,11 @@ export class Add {
     };
     let status = {};
     let result:number;
-    let userPath = '/items/' + username;
+    let userPath = '/users/' + username;
     
     // Check Username Taken
     let txtUN = document.getElementById("username");
-    var userQuery = this.temp.database.object('/items',{preserveSnapshot: true});
+    var userQuery = this.temp.database.object('/users',{preserveSnapshot: true});
     userQuery.$ref.once("value").then(snapshot => {
       if(snapshot.child(username).exists()){
         result = 1;
@@ -141,7 +141,7 @@ export class Add {
 
     // Check Name for Existing User
     
-    var testQuery = this.temp.database.list("items",{
+    var testQuery = this.temp.database.list("/users",{
         preserveSnapshot: true,
         query: {
           orderByChild: "name",

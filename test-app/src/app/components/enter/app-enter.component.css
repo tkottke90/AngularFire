@@ -1,0 +1,32 @@
+:host {
+    width: 95%;
+    margin: 2.5%;
+    padding: 1%;
+    font-size: 85%;
+}
+
+div {
+    margin:2.5%;
+}
+
+input {
+    width: 95%;
+    margin: 1%;
+}
+
+label {
+    width: 95%;
+    margin: 1%;
+    text-align: left;
+}
+
+.btnLogin {
+    margin: 5%;
+    padding: 5%; 
+    float: right;
+    background-color: transparent;
+    border: 2px solid black;
+    box-shadow: 0;
+    border-radius: 15%;
+    cursor: pointer;
+}

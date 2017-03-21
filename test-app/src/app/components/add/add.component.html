@@ -1,16 +1,11 @@
-<div id="addmain">
-    <div id="inname">
-        <label>Enter Name:</label>
-        <input #name id="name"/>
-    </div>
-    <div id="inun">
-        <label>Enter Username:</label>
-        <input #un id="username" required/>
-        <div class="notification" id="usertaken">Username Already Taken!</div>
-    </div>
-    <div id="inpw">
-        <label>Enter Password:</label>
-        <input #pw id="password" required/>
-    </div>
-    <button class="btnremove" (click)="add(name.value,un.value,pw.value);">Add</button>
-</div>
+<label>Enter Name:</label>
+<input #name id="name"/>
+
+<label>Enter Username:</label>
+<input #un id="username" required/>
+<div class="notification" id="usertaken">Username Already Taken!</div>
+
+<label>Enter Password:</label>
+<input #pw id="password" required/>
+
+<button class="btnremove" (click)="add(name.value,un.value,pw.value);">Add</button>
