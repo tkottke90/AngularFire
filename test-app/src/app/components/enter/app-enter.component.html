@@ -1,9 +1,10 @@
+<div class="msg" [ngClass]="{ 'Error' : isErrorVisible }" >Incorrect Login Information</div>
 <div>
   <label>Username</label>
-  <input #un id="username"/>
+  <input #un id="username" (focus)="resetInputs();"/>
 </div>
 <div>
   <label>Password</label>
-  <input #pw id="password"/>
+  <input #pw id="password" (focus)="resetInputs();"/>
 </div>
 <button class="btnLogin" (click)="login(un.value,pw.value);">Login</button>

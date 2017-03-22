@@ -45,18 +45,25 @@
 }
 
 list-add.nUser{
-    display: none;
-    margin: 5%;
-}
-
-list-add {
     display: inline-block;
 }
 
-app-enter.eUser{
+list-add {
     display: none;
 }
 
+app-enter.eUser{
+    display: inline-block;
+}
+
 app-enter {
+    display: none;
+}
+
+app-user-tile {
+    display: none
+}
+
+app-user-tile.user {
     display: inline-block;
 }

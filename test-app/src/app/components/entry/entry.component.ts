@@ -7,16 +7,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class EntryComponent implements OnInit {
 
-  isClassVisible:boolean =  true;
-  isLoginVisible:boolean = true;
-  userLoggedIn:boolean = false;
+  isClassVisible:boolean =  false;
+  isLoginVisible:boolean = false;
+  isLoggedIn:boolean = false;
  
   viewStatus: number;
-  public myname: string;
+  myname: string = "";
 
   constructor() {}
 
   ngOnInit() {
+  }
+
+  getUser(user: string){
+    console.log(user);
+    this.myname = user;
   }
 
   clearView(view: number){
@@ -25,23 +30,42 @@ export class EntryComponent implements OnInit {
   }
 
   changeView(view:number){
+    let loginButton = document.getElementById("login");
+    let signupButton = document.getElementById("signup");
+    
     if(this.viewStatus == view){this.viewStatus = 0;}else{this.viewStatus = view;}
     switch(this.viewStatus){
       case 0: // Default
-        this.isClassVisible = true;
-        this.isLoginVisible = true;
+        this.isClassVisible = false;
+        this.isLoginVisible = false;
+        this.isLoggedIn = false;
+        loginButton.style.display = "block";
+        signupButton.style.display = "block";
         break;
       case 1: // Sign Up User
-        this.isClassVisible = false;
-        this.isLoginVisible = true;
-        break;
-      case 2: // Sign In User
         this.isClassVisible = true;
         this.isLoginVisible = false;
+        this.isLoggedIn = false;
+        loginButton.style.display = "block";
+        signupButton.style.display = "block";
+        break;
+      case 2: // Sign In User
+        this.isClassVisible = false;
+        this.isLoginVisible = true;
+        this.isLoggedIn = false;
+        loginButton.style.display = "block";
+        signupButton.style.display = "block";
+        break;
+      case 3: // User Signed In
+        this.isClassVisible = false;
+        this.isLoginVisible = false;
+        this.isLoggedIn = true;
+        loginButton.style.display = "none";
+        signupButton.style.display = "none";
         break;
       default: // Issue with value, set to 0 and rerun
-
         this.viewStatus = 0;
+        this.changeView(0);
     }
   }
 

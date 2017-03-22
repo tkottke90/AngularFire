@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { EntryComponent } from './components/entry/entry.component';
 import { AppEnterComponent } from './components/enter/app-enter.component';
 import { DebugtoolComponent } from './components/debugtool/debugtool.component';
+import { UserTileComponent } from './components/enter/user-tile/user-tile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DebugtoolComponent } from './components/debugtool/debugtool.component';
     HeaderComponent,
     EntryComponent,
     AppEnterComponent,
-    DebugtoolComponent
+    DebugtoolComponent,
+    UserTileComponent
   ],
   imports: [
     BrowserModule,

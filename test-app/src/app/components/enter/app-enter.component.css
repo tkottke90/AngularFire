@@ -11,7 +11,9 @@ div {
 
 input {
     width: 95%;
+    height: 30%;
     margin: 1%;
+    padding: 2%;
 }
 
 label {
@@ -29,4 +31,13 @@ label {
     box-shadow: 0;
     border-radius: 15%;
     cursor: pointer;
+}
+
+div.msg.Error {
+    display: inline-block;
+}
+
+div.msg {
+    display: none;
+    color: red;
 }

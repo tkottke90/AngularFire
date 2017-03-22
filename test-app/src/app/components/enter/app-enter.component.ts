@@ -10,9 +10,12 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 
 export class AppEnterComponent implements OnInit {
   @Output() clearView = new EventEmitter<number>();
-  
+  @Output() getUser = new EventEmitter<number>();
+
   dbRef: AngularFire;
   log: FirebaseListObservable<any[]>;
+
+  isErrorVisible:boolean = false;
 
   constructor(af: AngularFire) {
     this.dbRef = af;
@@ -20,20 +23,26 @@ export class AppEnterComponent implements OnInit {
   }
 
   login(un: string, pw: string){    
-    let userpath:string = '/items/' + un;
+    let userpath:string = '/users/' + un;
     let curTime = (new Date()).toString();
+    this.isErrorVisible = false;
 
     if(un !== "" && pw !== ""){
       let user = this.dbRef.database.object(userpath,{preserveSnapshot:true});
 
       user.$ref.once('value').then(data => {
         if(data.val() != null){
-          if(data.val().username == un){
             if(data.val().password == pw){
               console.log("Successful Login");
-              
-              this.clearView.emit(0);
+              let userLog = this.dbRef.database.list((userpath + "/log"),{preserveSnapshot: true}).push({
+                event: "User Login",
+                timestamp:  curTime,
+              });
+              this.getUser.emit(data.key);
+              this.clearView.emit(3);
+              this.clearInputs();
               // Show User Logged In Component
+              
             }else{
               console.log("Incorrect Password");
               let userLog = this.dbRef.database.list((userpath + "/log"),{preserveSnapshot: true}).push({
@@ -41,15 +50,36 @@ export class AppEnterComponent implements OnInit {
                 timestamp:  curTime,
                 attemptedPassword: pw
               });
+              this.isErrorVisible = true;
+              this.errorInputs();
             }
-          }else{console.log("Incorrect Username");}
-        }
+          }else{console.log("Incorrect Username"); this.isErrorVisible = true;}
       });
 
-    }else{console.log("Login Fields Empty");}
+    }else{console.log("Login Fields Empty");this.isErrorVisible = true;}
   }
 
-  
+  resetInputs(){
+    let inputs = document.getElementsByTagName('input');
+    for(let i = 0; i < inputs.length; i++){
+      inputs[i].style.border = "1px solid black"
+    }
+  }
+
+  errorInputs(){
+    let inputs = document.getElementsByTagName('input');
+    for(let i = 0; i < inputs.length; i++){
+      inputs[i].style.border = "1px solid red"
+    }
+  }
+
+  clearInputs(){
+    let inputs = document.getElementsByTagName('input');
+    for(let i = 0; i < inputs.length; i++){
+      inputs[i].value = "";
+      inputs[i].style.border = "1px solid black"
+    }
+  }
 
   ngOnInit() {
   }
