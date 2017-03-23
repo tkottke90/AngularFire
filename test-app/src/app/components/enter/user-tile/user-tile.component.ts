@@ -18,6 +18,8 @@ export class UserTileComponent implements OnInit {
     this.db = af;
   }
 
+  
+
   ngOnChanges(changes : any){
     if(this.username != "" || this.username != undefined){
       console.log("User-Tile Username Input: " + this.username);

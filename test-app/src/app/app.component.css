@@ -3,10 +3,9 @@
     font-family: sans-serif;
 }
 
-app-header {
-    margin: 0;
+:host{
+    width: 100%;
 }
-
 
 app-debugtool {
     width: 33%;
