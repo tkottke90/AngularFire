@@ -1,0 +1,41 @@
+:host {
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 2%;
+    display: inline-block;
+    margin: 2%;
+    padding: 2%;
+    z-index: 2;
+    transition: box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+    -moz-transition: box-shadow 0.5;
+}
+
+:host::after{
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+
+:host:hover{
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3) ;
+    z-index: 8;
+}
+
+button {
+    float: right;
+    background-color: inherit;
+    border: 0;
+    font-size: 1.75vmin;
+    display: none;
+}
+
+button.cardfocus {
+    display: block;
+}
+
+h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 4vmin;
+}

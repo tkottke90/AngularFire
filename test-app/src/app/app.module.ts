@@ -13,6 +13,7 @@ import { AppEnterComponent } from './components/enter/app-enter.component';
 import { DebugtoolComponent } from './components/debugtool/debugtool.component';
 import { UserTileComponent } from './components/enter/user-tile/user-tile.component';
 import { CardContainerComponent } from './components/card-container/card-container.component';
+import { TextCardComponent } from './components/cards/text-card/text-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CardContainerComponent } from './components/card-container/card-contain
     AppEnterComponent,
     DebugtoolComponent,
     UserTileComponent,
-    CardContainerComponent
+    CardContainerComponent,
+    TextCardComponent
   ],
   imports: [
     BrowserModule,
