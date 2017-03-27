@@ -20,7 +20,7 @@ export class EntryComponent implements OnInit {
   }
 
   getUser(user: string){
-    console.log(user);
+    console.log("Entry.getUser = " + user);
     this.myname = user;
   }
 

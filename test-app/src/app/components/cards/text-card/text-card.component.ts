@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-text-card',
@@ -7,16 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextCardComponent implements OnInit {
 
+  @Input() cardInfo: string;
+  @Output() removeCard = new EventEmitter<string>();
+
   header: string = "";
   shortText: string = "";
   
   cardPath: string = "";
 
   isButtonVisible = false;
+  isDeleteDisabled = false;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
+  }
+
+  remCard(){
+    
   }
 
 }

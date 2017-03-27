@@ -43,4 +43,6 @@ import { TextCardComponent } from './components/cards/text-card/text-card.compon
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  currentUser: string = "";
+}

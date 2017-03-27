@@ -41,7 +41,6 @@ export class AppEnterComponent implements OnInit {
               this.getUser.emit(data.key);
               this.clearView.emit(3);
               this.clearInputs();
-              // Show User Logged In Component
               
             }else{
               console.log("Incorrect Password");

@@ -11,30 +11,29 @@
     -moz-transition: box-shadow 0.5;
 }
 
-:host::after{
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-}
-
 :host:hover{
     box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.3) ;
     z-index: 8;
 }
 
-button {
+button{
+    color: rgb(183, 207, 231);
     float: right;
     background-color: inherit;
     border: 0;
     font-size: 1.75vmin;
-    display: none;
-}
-
-button.cardfocus {
     display: block;
 }
 
+#delete {
+    z-index: 4;
+    position: relative;
+    top: -35px;
+    left: 5px;
+}
+
 h2 {
+    
     margin: 0;
     text-align: center;
     font-size: 4vmin;
