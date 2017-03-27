@@ -12,6 +12,7 @@ import { EntryComponent } from './components/entry/entry.component';
 import { AppEnterComponent } from './components/enter/app-enter.component';
 import { DebugtoolComponent } from './components/debugtool/debugtool.component';
 import { UserTileComponent } from './components/enter/user-tile/user-tile.component';
+import { CardContainerComponent } from './components/card-container/card-container.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserTileComponent } from './components/enter/user-tile/user-tile.compon
     EntryComponent,
     AppEnterComponent,
     DebugtoolComponent,
-    UserTileComponent
+    UserTileComponent,
+    CardContainerComponent
   ],
   imports: [
     BrowserModule,

@@ -7,15 +7,19 @@
 h1 {
     width: 100%;
     font-size: 3vmin;
+    margin: 1%;
     text-align: center;
     display: inline-block;
+    box-sizing: border-box;
 }
 
 img {
     width: 25%;
     height: 25%;
-    margin: 0 12%;
+    margin: 2%;
     padding: 0.5%;
+    box-sizing: border-box;
+    float: right;
     cursor: pointer;
     -webkit-transition: box-shadow 0.5s;
     -moz-transition: box-shadow 0.5s;

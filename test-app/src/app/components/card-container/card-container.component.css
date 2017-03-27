@@ -1,0 +1,14 @@
+:host {
+    display: inline-block;
+    width:100%;
+
+    margin: 1%;
+    padding: 1%;
+
+    align-content: center;
+}
+
+div {
+    width: 20%;
+    height: width;
+}

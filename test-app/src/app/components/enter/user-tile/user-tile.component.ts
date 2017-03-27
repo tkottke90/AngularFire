@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import {AngularFire, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
 
 @Component({
@@ -13,6 +13,7 @@ export class UserTileComponent implements OnInit {
   db : AngularFire;
 
   @Input() username : string = "";
+  @Output() clearView = new EventEmitter<number>();
 
   constructor(af : AngularFire) {
     this.db = af;
@@ -33,6 +34,14 @@ export class UserTileComponent implements OnInit {
     }
   }
 
+
+  logout(){
+    this.username = "";
+    this.clearView.emit(0);
+  }
+
+  settings(){}
+  
   ngOnInit() {
   }
 
