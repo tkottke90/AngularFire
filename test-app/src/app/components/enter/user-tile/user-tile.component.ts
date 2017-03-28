@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import {AngularFire, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { UserHandlerService } from '../../../services/user-handler/user-handler.service';
 
 @Component({
   selector: 'app-user-tile',
@@ -18,8 +19,6 @@ export class UserTileComponent implements OnInit {
   constructor(af : AngularFire) {
     this.db = af;
   }
-
-  
 
   ngOnChanges(changes : any){
     if(this.username != "" || this.username != undefined){

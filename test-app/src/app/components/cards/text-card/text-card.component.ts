@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges , Input, Output, EventEmitter } from '@angular/core';
+import { UserHandlerService } from '../../../services/user-handler/user-handler.service';
 
 
 @Component({
@@ -19,15 +20,16 @@ export class TextCardComponent implements OnInit {
   isButtonVisible = false;
   isDeleteDisabled = false;
 
-  constructor() {
-
+  constructor(private _userHandler: UserHandlerService) {
+  
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  remCard(){
+  ngOnChanges(){
     
   }
+
+  remCard(){}
 
 }

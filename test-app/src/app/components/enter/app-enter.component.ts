@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { UserHandlerService } from '../../services/user-handler/user-handler.service';
 
 @Component({
   selector: 'app-enter',

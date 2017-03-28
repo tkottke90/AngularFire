@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { UserHandlerService } from '../../services/user-handler/user-handler.service';
 
 @Component({
   selector: 'app-entry',
@@ -14,13 +15,15 @@ export class EntryComponent implements OnInit {
   viewStatus: number;
   myname: string = "";
 
-  constructor() {}
+  constructor(private _userHandler: UserHandlerService) {}
 
   ngOnInit() {
   }
 
   getUser(user: string){
-    console.log("Entry.getUser = " + user);
+    //console.log("Entry.getUser = " + user);
+    this._userHandler.userPath = '/users/' + user;
+    console.log("Entry.getUser(" + this._userHandler.checkExists(('/users/' + user)) + ")");
     this.myname = user;
   }
 

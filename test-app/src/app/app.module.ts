@@ -15,6 +15,8 @@ import { UserTileComponent } from './components/enter/user-tile/user-tile.compon
 import { CardContainerComponent } from './components/card-container/card-container.component';
 import { TextCardComponent } from './components/cards/text-card/text-card.component';
 
+import { UserHandlerService } from './services/user-handler/user-handler.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,7 @@ import { TextCardComponent } from './components/cards/text-card/text-card.compon
       messagingSenderId: "764507748270"
     })
   ],
-  providers: [],
+  providers: [UserHandlerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
