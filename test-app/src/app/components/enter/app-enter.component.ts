@@ -34,7 +34,7 @@ export class AppEnterComponent implements OnInit {
       user.$ref.once('value').then(data => {
         if(data.val() != null){
             if(data.val().password == pw){
-              console.log("Successful Login");
+              // console.log("Successful Login");
               let userLog = this.dbRef.database.list((userpath + "/log"),{preserveSnapshot: true}).push({
                 event: "User Login",
                 timestamp:  curTime,

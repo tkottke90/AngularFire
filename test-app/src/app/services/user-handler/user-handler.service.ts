@@ -14,13 +14,12 @@ export class UserHandlerService {
     console.log("UserHandlerService Constructed");
   }
 
-  checkExists(path: string): boolean{
-    let temp: boolean = false;
-    console.log("User-Handler.checkExists(" + path + ")");
-    let userQuery = this._angular.database.list(path,{preserveSnapshot: true});
-    userQuery.subscribe(snapshot => {if(snapshot.length > 0){temp = !temp}});
-    userQuery = null;
-    return temp;
+  checkExists(path: string): any{
+    let temp: boolean = null;
+    return this._angular.database.object(path,{preserveSnapshot: true})
+      .$ref.once('value', function(data){
+        return data.exists();
+      });
   }
 
   getUser(username: string){
