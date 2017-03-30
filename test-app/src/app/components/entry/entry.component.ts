@@ -24,9 +24,12 @@ export class EntryComponent implements OnInit {
     console.log("Entry.getUser = " + user);
     this._userHandler.userPath = '/users/' + user;
     
-    console.log("checkExists: " + this._userHandler.checkExists(('/users/' + user)));
+    /*console.log(
+      "checkExists: " + this._userHandler.checkExists(('/users/' + user))
+    );*/
 
-    this.myname = user;
+    console.log("Get user: " + this._userHandler.getUser(user));
+    this._userHandler.checkExists(('/users/' + user));
   }
 
   clearView(view: number){
