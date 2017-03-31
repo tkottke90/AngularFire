@@ -21,15 +21,16 @@ export class EntryComponent implements OnInit {
   }
 
   getUser(user: string){
-    console.log("Entry.getUser = " + user);
-    this._userHandler.userPath = '/users/' + user;
-    
-    /*console.log(
-      "checkExists: " + this._userHandler.checkExists(('/users/' + user))
-    );*/
+    let temp: boolean = null;
 
-    console.log("Get user: " + this._userHandler.getUser(user));
-    this._userHandler.checkExists(('/users/' + user));
+    this._userHandler.getUser(user)
+      .$ref.once('value', function(userResult){
+        Promise.resolve(userResult.exists());
+      }).then(function(userE){
+        temp = userE; 
+        console.log(userE);
+      }).catch(function(e){console.log(e);});
+      
   }
 
   clearView(view: number){

@@ -14,29 +14,24 @@ export class UserHandlerService {
     console.log("UserHandlerService Constructed");
   }
 
-  checkExists(path: string): any{
-    let temp: boolean = null;
-    let userQuery = this._angular.database.object(path,{preserveSnapshot: true});
-    userQuery.$ref.once('value', function(data){
-        console.log("User Exists:" + data.exists());
-        temp = data.exists();
-        return Promise.all([
-          data.key,
-          data.val()
-        ]);
-      }).then(function(userData){
-        console.log("Temp Post Query: " + temp);
-        return temp;
-      });
+  getUser(username: string){
+    return this._angular.database.object(('/users/' + username),{preserveSnapshot: true});
   }
 
-  getUser(username: string): FirebaseObjectObservable<any[]>{
-    return this._angular.database.object(('/user/' + username),{preserveSnapshot: true});
+  getUserInfo(info: string){
+    switch(info){
+      case "log":
+        return this._angular.database.list((this.userPath + "/log"));
+      case "cards":
+        return this._angular.database.list((this.userPath + "/cards"));
+    }
   }
-
+  
   setCurrentUser(username:string){
     this.userPath = '/users/' + username;
-    console.log(this.checkExists(this.userPath));
+    this.user = this.getUser(username);
+    this.userLog = this.getUserInfo("log");
+    this.userCards = this.getUserInfo("cards");
   }
 
   clearUser(){

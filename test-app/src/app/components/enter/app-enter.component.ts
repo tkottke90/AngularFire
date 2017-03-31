@@ -40,9 +40,7 @@ export class AppEnterComponent implements OnInit {
                 timestamp:  curTime,
               });
               this.getUser.emit(data.key);
-              this.clearView.emit(3);
               this.clearInputs();
-              
             }else{
               console.log("Incorrect Password");
               let userLog = this.dbRef.database.list((userpath + "/log"),{preserveSnapshot: true}).push({
