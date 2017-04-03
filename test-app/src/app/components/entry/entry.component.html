@@ -2,4 +2,4 @@
 <div class="button" id="signup" (click)="changeView(1);">Sign Up</div>
 <list-add [ngClass]="{ 'nUser' : isClassVisible }" (clearView)="clearView($event)"></list-add>
 <app-enter [ngClass]="{ 'eUser' : isLoginVisible }" (clearView)="clearView($event)" (getUser)="getUser($event)"></app-enter>
-<app-user-tile [ngClass]="{ 'user' : isLoggedIn }" [username]="this.myname" (clearView)="clearView($event)"></app-user-tile>
+<app-user-tile [ngClass]="{ 'user' : isLoggedIn }" (clearView)="clearView($event)"></app-user-tile>

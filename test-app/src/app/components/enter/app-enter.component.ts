@@ -11,25 +11,43 @@ import { UserHandlerService } from '../../services/user-handler/user-handler.ser
 
 export class AppEnterComponent implements OnInit {
   @Output() clearView = new EventEmitter<number>();
-  @Output() getUser = new EventEmitter<number>();
+  @Output() getUser = new EventEmitter<string>();
 
   dbRef: AngularFire;
-  log: FirebaseListObservable<any[]>;
 
   isErrorVisible:boolean = false;
 
-  constructor(_af: AngularFire, _userHandler: UserHandlerService) {
-    this.dbRef = _af;
-    this.log = _af.database.list('/log');
-  }
+  constructor(private _af: AngularFire, private _userHandler: UserHandlerService) {}
 
   login(un: string, pw: string){    
     let userpath:string = '/users/' + un;
     let curTime = (new Date()).toString();
     this.isErrorVisible = false;
 
+    // Check if user filled in un/pw fields, no empty fields accepted
     if(un !== "" && pw !== ""){
-         
+      // Call UserHandlerService to check if account exists
+      this._userHandler.checkExists(un).then(_ => {
+        if(this._userHandler.userExists){
+          // Call UserHandlerService to check if password entered is correct;
+          this._userHandler.checkLogin(un,pw).then(_ => {
+            if(this._userHandler.correctLogin){
+              this._userHandler.setCurrentUser(un);
+              this.clearInputs();
+              this.getUser.emit(un);
+              this.clearView.emit(3)
+            }else{
+              console.log("Incorrect Password");
+            }
+          })
+        }else{alert("Incorrect Login Information");this.isErrorVisible = true;}
+      }).catch((e) => this._userHandler.dbLogger.push({
+        event: "Login Error",
+        description: "UserHandlerService - checkExists Error",
+        user: un,
+        timestamp: curTime,
+        error: e
+      }));
       
       /*let user = this.dbRef.database.object(userpath,{preserveSnapshot:true});
 

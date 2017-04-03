@@ -21,7 +21,7 @@ export class EntryComponent implements OnInit {
   }
 
   getUser(user: string){
-     
+     this.myname = user;
   }
 
   clearView(view: number){
