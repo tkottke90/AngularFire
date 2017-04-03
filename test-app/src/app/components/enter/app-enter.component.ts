@@ -18,9 +18,9 @@ export class AppEnterComponent implements OnInit {
 
   isErrorVisible:boolean = false;
 
-  constructor(af: AngularFire) {
-    this.dbRef = af;
-    this.log = af.database.list('/log');
+  constructor(_af: AngularFire, _userHandler: UserHandlerService) {
+    this.dbRef = _af;
+    this.log = _af.database.list('/log');
   }
 
   login(un: string, pw: string){    
@@ -29,7 +29,9 @@ export class AppEnterComponent implements OnInit {
     this.isErrorVisible = false;
 
     if(un !== "" && pw !== ""){
-      let user = this.dbRef.database.object(userpath,{preserveSnapshot:true});
+         
+      
+      /*let user = this.dbRef.database.object(userpath,{preserveSnapshot:true});
 
       user.$ref.once('value').then(data => {
         if(data.val() != null){
@@ -52,7 +54,7 @@ export class AppEnterComponent implements OnInit {
               this.errorInputs();
             }
           }else{console.log("Incorrect Username"); this.isErrorVisible = true;}
-      });
+      });*/
 
     }else{console.log("Login Fields Empty");this.isErrorVisible = true;}
   }

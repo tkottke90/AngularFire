@@ -8,10 +8,22 @@ export class UserHandlerService {
   userLog: FirebaseListObservable<any[]> = null;
   userCards: FirebaseListObservable<any[]> = null;
 
+  userExists: boolean;
   userPath: string = "";
 
   constructor(private _angular : AngularFire) {
     console.log("UserHandlerService Constructed");
+    
+  }
+
+  checkExists(user: string){
+    let that = this;
+    let uD: FirebaseObjectObservable<any[]> = this.getUser(user);
+    return new Promise(function(resolve,reject){
+      uD.$ref.once('value',function(userData){
+        that.userExists = userData.exists();
+      });
+    });
   }
 
   getUser(username: string){
@@ -29,7 +41,7 @@ export class UserHandlerService {
   
   setCurrentUser(username:string){
     this.userPath = '/users/' + username;
-    this.user = this.getUser(username);
+    this.getUser(username);
     this.userLog = this.getUserInfo("log");
     this.userCards = this.getUserInfo("cards");
   }

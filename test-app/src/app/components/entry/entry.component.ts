@@ -21,16 +21,7 @@ export class EntryComponent implements OnInit {
   }
 
   getUser(user: string){
-    let temp: boolean = null;
-
-    this._userHandler.getUser(user)
-      .$ref.once('value', function(userResult){
-        Promise.resolve(userResult.exists());
-      }).then(function(userE){
-        temp = userE; 
-        console.log(userE);
-      }).catch(function(e){console.log(e);});
-      
+     
   }
 
   clearView(view: number){
