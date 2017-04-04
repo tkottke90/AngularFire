@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { UserHandlerService } from '../../../services/user-handler/user-handler.service';
 
@@ -8,22 +8,26 @@ import { UserHandlerService } from '../../../services/user-handler/user-handler.
   styleUrls: ['./user-tile.component.css']
 })
 export class UserTileComponent implements OnInit {
-  user : FirebaseObjectObservable<any[]>; // User Object
-  log : FirebaseListObservable<any[]>; // User Log 
-  cards : FirebaseListObservable<any[]>; // User Cards
 
-  username : string = "";
   @Output() clearView = new EventEmitter<number>();
 
-  constructor(private _af : AngularFire, private _userHandler: UserHandlerService) {
+  constructor(private _af : AngularFire, private _userHandler: UserHandlerService) {}
+
+  login(){
+    //this._userHandler.user.$ref.once('value').then(data => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));
   }
 
   ngOnChanges(changes : any){
-    console.log(changes);
-/*    this._userHandler.user.$ref.once('value').then((data) => this.username = data.val().name)
+
+
+
+/*    console.log(changes);
+    this.user = this._userHandler.user;
+    document.getElementById("welcome").textContent = ("Welcome, " + this.username + "!");
+
     console.log("User-Tile Username Input: " + this.username);
-    this._userHandler.user.$ref.once('value').then((data) => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));*/
-  }
+    this._userHandler.user.$ref.once('value').then((data) => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));
+  */}
 
 
   logout(){

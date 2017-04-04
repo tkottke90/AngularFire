@@ -35,7 +35,6 @@ export class AppEnterComponent implements OnInit {
               this._userHandler.setCurrentUser(un);
               this.clearInputs();
               this.getUser.emit(un);
-              this.clearView.emit(3)
             }else{
               console.log("Incorrect Password");
             }
