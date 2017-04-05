@@ -15,6 +15,6 @@ export class CardContainerComponent implements OnInit {
   }
 
   removeCard(){
-
+    
   }
 }

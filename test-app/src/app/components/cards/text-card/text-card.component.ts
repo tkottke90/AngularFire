@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges , Input, Output, EventEmitter } from '@angular/core';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { UserHandlerService } from '../../../services/user-handler/user-handler.service';
 
 
@@ -7,12 +8,11 @@ import { UserHandlerService } from '../../../services/user-handler/user-handler.
   templateUrl: './text-card.component.html',
   styleUrls: ['./text-card.component.css']
 })
-export class TextCardComponent implements OnInit {
+export class TextCardComponent {
 
-  @Input() cardInfo: string;
   @Output() removeCard = new EventEmitter<string>();
 
-  header: string = "";
+  header: string = "Header";
   shortText: string = "";
   
   cardPath: string = "";
@@ -20,16 +20,21 @@ export class TextCardComponent implements OnInit {
   isButtonVisible = false;
   isDeleteDisabled = false;
 
-  constructor(private _userHandler: UserHandlerService) {
-  
-  }
+  constructor(private _angular: AngularFire, private _userHandler: UserHandlerService) {}
 
-  ngOnInit() {}
-
-  ngOnChanges(){
+  TextCardConstructor(){
+    let that = this;
+    let cData = this._userHandler;
     
+    new Promise(function(resolve,reject){
+      
+    });
   }
 
-  remCard(){}
+  ngOnChanges(){}
+
+  remCard(){
+
+  }
 
 }

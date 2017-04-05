@@ -14,21 +14,8 @@ export class UserTileComponent implements OnInit {
   constructor(private _af : AngularFire, private _userHandler: UserHandlerService) {}
 
   login(){
-    //this._userHandler.user.$ref.once('value').then(data => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));
+    this._userHandler.user.$ref.once('value').then(data => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));
   }
-
-  ngOnChanges(changes : any){
-
-
-
-/*    console.log(changes);
-    this.user = this._userHandler.user;
-    document.getElementById("welcome").textContent = ("Welcome, " + this.username + "!");
-
-    console.log("User-Tile Username Input: " + this.username);
-    this._userHandler.user.$ref.once('value').then((data) => document.getElementById("welcome").textContent = ("Welcome, " + data.val().name + "!"));
-  */}
-
 
   logout(){
     this._userHandler.clearUser();

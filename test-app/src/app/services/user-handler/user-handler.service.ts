@@ -99,9 +99,13 @@ export class UserHandlerService {
 
   /**
    * Method that pushes user events to users log in the database and
-   * clears the user information from the service so that another user can login
+   * clears the user information from the service so that another user can login.  Also adds
+   * logout to entry before program closes
    */
   clearUser(){
+    let curTime = (new Date()).toString();
+
+    this.userEvents['logout'] = curTime;
     this.userLog.push(this.userEvents).then(this.userLog = null);
     this.user = null;
     this.userCards = null;
