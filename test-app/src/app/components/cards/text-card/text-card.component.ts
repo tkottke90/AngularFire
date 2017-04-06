@@ -10,12 +10,13 @@ import { UserHandlerService } from '../../../services/user-handler/user-handler.
 })
 export class TextCardComponent {
 
+  @Input() cardInfo: FirebaseObjectObservable<any[]>;
   @Output() removeCard = new EventEmitter<string>();
+
+  cData: FirebaseObjectObservable<any[]>;
 
   header: string = "Header";
   shortText: string = "";
-  
-  cardPath: string = "";
 
   isButtonVisible = false;
   isDeleteDisabled = false;
@@ -24,14 +25,18 @@ export class TextCardComponent {
 
   TextCardConstructor(){
     let that = this;
-    let cData = this._userHandler;
-    
+    this.cData = this.cardInfo;
     new Promise(function(resolve,reject){
-      
+      that.cData.$ref.once('value').then((data) => {
+        that.header = data.val().header;
+        that.shortText = data.val().description;
+      });
     });
   }
 
   ngOnChanges(){}
+
+  updateCard(){}
 
   remCard(){
 

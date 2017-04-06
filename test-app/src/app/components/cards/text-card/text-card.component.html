@@ -2,4 +2,4 @@
 <button id="delete" (click)="remCard();">X</button>
 <p>{{ shortText }}</p>
 <button id="edit">Edit</button>
-<button id="share">Share</button>
+<button [ngClass]="{ bVis : isButtonVisible }" id="share">Share</button>
