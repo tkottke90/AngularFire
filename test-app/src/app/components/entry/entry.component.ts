@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { UserTileComponent } from '../../components/enter/user-tile/user-tile.component';
-import { CardContainerComponent } from '../../components/card-container/card-container.component'
 import { UserHandlerService } from '../../services/user-handler/user-handler.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { UserHandlerService } from '../../services/user-handler/user-handler.ser
 export class EntryComponent implements OnInit {
 
   @ViewChild(UserTileComponent) private userTile: UserTileComponent;
-  @ViewChild(CardContainerComponent) private cardContainer: CardContainerComponent;
+  @Output() loginStatus = new EventEmitter();
 
   isClassVisible:boolean =  false;
   isLoginVisible:boolean = false;
@@ -26,8 +25,8 @@ export class EntryComponent implements OnInit {
 
   getUser(user: string){
      this.userTile.login();
-     
      this.clearView(3);
+     this.loginStatus.emit(true);
   }
 
   clearView(view: number){

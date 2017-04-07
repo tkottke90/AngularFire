@@ -16,6 +16,7 @@ import { CardContainerComponent } from './components/card-container/card-contain
 import { TextCardComponent } from './components/cards/text-card/text-card.component';
 
 import { UserHandlerService } from './services/user-handler/user-handler.service';
+import { CardManagerService } from './services/card-manager/card-manager.service';
 
 @NgModule({
   declarations: [
@@ -42,9 +43,10 @@ import { UserHandlerService } from './services/user-handler/user-handler.service
       messagingSenderId: "764507748270"
     })
   ],
-  providers: [UserHandlerService],
-  bootstrap: [AppComponent]
+  providers: [UserHandlerService,CardManagerService],
+  bootstrap: [AppComponent],
+  entryComponents: [TextCardComponent]
 })
 export class AppModule {
-  currentUser: string = "";
+  
 }

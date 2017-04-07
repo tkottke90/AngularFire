@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { UserHandlerService } from '../../services/user-handler/user-handler.service';
-import { TextCardComponent } from "../../components/cards/text-card/text-card.component"
-
+import { CardManagerService } from '../../services/card-manager/card-manager.service';
+import { CardBase } from '../../components/cards/card-base.class';
+import { CardDirective } from "./card-container.directive"
 
 @Component({
   selector: 'app-card-container',
@@ -10,24 +12,45 @@ import { TextCardComponent } from "../../components/cards/text-card/text-card.co
 })
 export class CardContainerComponent {
 
-  test = {}; // object that contains card references
+  @ViewChild(CardDirective) cardHost: CardDirective;
 
-  constructor(private _userHandler: UserHandlerService) { }
+  cards: CardBase[];
+  currentAddIndex: number = -1;
+  interval: any;
 
-  login(){}
+  constructor(private _cardManager: CardManagerService, private _componentFactory: ComponentFactoryResolver) { }
+
+  login(){
+    this.loadCards();
+    this.getCards();
+  }
 
   logout(){}
 
   getUserCards(){
-    let that = this;
-    this._userHandler.userCards.$ref.once('value',(data) => {
-      data.forEach(function(card) {
-        
-        
-        return false;
-      });
-    });
+    this.cards = this._cardManager.getComp();
   }
+
+  loadCards(){
+    this.currentAddIndex = (this.currentAddIndex + 1) % this.cards.length;
+    let cardItem = this.cards[this.currentAddIndex];
+
+    let compFactory = this._componentFactory.resolveComponentFactory(cardItem.component);
+
+    let ViewContainerRef = this.cardHost.ViewContainerRef;
+    ViewContainerRef.clear();
+
+    let componentRef = ViewContainerRef.createComponent(compFactory);
+    (<CardBase>componentRef.instance).data = cardItem.data;
+
+  }
+
+  getCards(){
+    this.interval = setInterval(() => {
+      this.loadCards();
+    },3000)
+  }
+
 
   addCard(){
     
@@ -35,35 +58,5 @@ export class CardContainerComponent {
 
   removeCard(){
     
-  }
-}
-
-class cardBase {
-  protected type:string = "";
-  protected key:string = "";
-  protected _domRef;
-
-  constructor(cardType:string, cardKey:string){
-    this.type = cardType;
-    this.key = cardKey;
-  }
-
-  get domRef(){
-    return this._domRef;
-  }
-
-  set domRef(cardInput){
-    this._domRef = cardInput;
-  }
-}
-
-class cardText extends cardBase {
-  header: string = "";
-  text: string = "";
-  description: string = "";
-
-  constructor(type: string, key: string){
-    super(name,key);
-    //this.domRef = new TextCardComponent();
   }
 }
