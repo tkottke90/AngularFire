@@ -14,24 +14,29 @@ export class CardContainerComponent {
 
   @ViewChild(CardDirective) cardHost: CardDirective;
 
-  cards: CardBase[];
+  private cards: Array<CardBase>;
   currentAddIndex: number = -1;
   interval: any;
 
-  constructor(private _cardManager: CardManagerService, private _componentFactory: ComponentFactoryResolver) { }
+  constructor(private _cardManager: CardManagerService, private _componentFactory: ComponentFactoryResolver) {
+    console.log('Card-Container Constructed');
+  }
 
   login(){
-    this.loadCards();
-    this.getCards();
+    this.getUserCards();
+    console.log(this.cards.toString);
+    //this.loadCards();
+    //this.getCards();
   }
 
   logout(){}
 
   getUserCards(){
-    this.cards = this._cardManager.getComp();
+    let temp = this._cardManager.getComp();
   }
 
   loadCards(){
+
     this.currentAddIndex = (this.currentAddIndex + 1) % this.cards.length;
     let cardItem = this.cards[this.currentAddIndex];
 
